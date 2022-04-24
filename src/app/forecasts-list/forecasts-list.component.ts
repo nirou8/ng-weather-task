@@ -10,12 +10,14 @@ import {ActivatedRoute} from '@angular/router';
 export class ForecastsListComponent {
 
   zipcode: string;
+  countrycode: string;
   forecast: any;
 
   constructor(private weatherService: WeatherService, route : ActivatedRoute) {
     route.params.subscribe(params => {
       this.zipcode = params['zipcode'];
-      weatherService.getForecast(this.zipcode)
+      this.countrycode = params['countrycode'];
+      weatherService.getForecast(this.zipcode, this.countrycode)
         .subscribe(data => this.forecast = data);
     });
   }
